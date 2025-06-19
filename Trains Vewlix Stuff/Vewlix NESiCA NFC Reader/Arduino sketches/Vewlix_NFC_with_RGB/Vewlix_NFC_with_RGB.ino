@@ -126,6 +126,7 @@ void setup(void) {
 
   for (int i = 0; i <= 255; i++) {
     setAllLEDs(strip.Color(i, i, i));
+    chenillardLEDs(strip.Color(0, 255, 0),strip.Color(255, 0, 0))
     delay(5); // Adjust delay for desired fade speed
   }
 }
@@ -242,5 +243,16 @@ void setAllLEDs(uint32_t color) {
   for (int i = 0; i < strip.numPixels(); i++) {
     strip.setPixelColor(i, color);
   }
+  strip.show();
+}
+
+void chenillardLEDs(uint32_t colorOn,uint32_t colorOff)) {
+  for (int i = 0; i < strip.numPixels(); i++) {
+    strip.setPixelColor(i, colorOn);
+    if (i > 0) {
+      strip.setPixelColor(i-1,colorOff))
+    }
+  }
+  strip.setPixelColor(strip.numPixels(),colorOff)
   strip.show();
 }
